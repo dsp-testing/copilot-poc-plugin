@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/github/copilot-extensions/main/schema/marketplace-manifest.schema.json",
+  "name": "Copilot PoC Plugin",
+  "slug": "copilot-poc-plugin",
+  "version": "1.0.0",
+  "description": "A proof-of-concept GitHub Copilot Extension that demonstrates how to build and expose a custom Copilot plugin.",
+  "homepage_url": "https://github.com/dsp-testing/copilot-poc-plugin",
+  "support_url": "https://github.com/dsp-testing/copilot-poc-plugin/issues",
+  "privacy_policy_url": "https://github.com/dsp-testing/copilot-poc-plugin/blob/main/PRIVACY.md",
+  "categories": ["developer-tools", "productivity"],
+  "keywords": ["copilot", "plugin", "extension", "github", "poc"],
+  "publisher": {
+    "name": "GitHub DSP Testing",
+    "github_login": "dsp-testing",
+    "website": "https://github.com/dsp-testing"
+  },
+  "logo": {
+    "url": "https://github.com/dsp-testing/copilot-poc-plugin/blob/main/marketplace/assets/logo.png",
+    "alt": "Copilot PoC Plugin logo"
+  },
+  "pricing": {
+    "model": "free",
+    "notes": "Available at no cost for GitHub-internal use only."
+  },
+  "permissions": [
+    {
+      "scope": "copilot_chat",
+      "access": "read_write",
+      "description": "Required to receive and respond to Copilot chat messages."
+    },
+    {
+      "scope": "user_email",
+      "access": "read",
+      "description": "Used to personalise responses."
+    }
+  ],
+  "agent": {
+    "endpoint": "https://<your-deployment-url>/",
+    "capabilities": [
+      "chat_completion",
+      "streaming"
+    ]
+  },
+  "visibility": "internal",
+  "installation": {
+    "min_github_plan": "team",
+    "supported_account_types": ["organization", "enterprise"]
+  }
+}
