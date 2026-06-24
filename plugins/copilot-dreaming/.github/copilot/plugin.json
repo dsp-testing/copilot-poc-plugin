@@ -1,0 +1,6 @@
+{
+  "name": "copilot-dreaming",
+  "version": "0.0.1",
+  "description": "PoC for Dreaming",
+  "skills": "./skills/"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "copilot-plugins",
+  "metadata": {
+    "description": "GitHub Copilot plugins",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "GitHub",
+    "email": "copilot@github.com"
+  },
+  "plugins": [
+    {
+      "name": "copilot-dreaming",
+      "description": "PoC for Dreaming",
+      "version": "0.0.1",
+      "author": {
+        "name": "GitHub",
+        "url": "https://www.github.com"
+      },
+      "license": "internal",
+      "source": {
+        "source": "github",
+        "repo": "dsp-testing/copilot-dreaming",
+        "path": "plugins/copilot-dreaming"
+      }
+    }
+  ]
+}

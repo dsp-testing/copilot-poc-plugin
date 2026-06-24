@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 2,
+  "repository": "<owner>/<repo>",
+  "runStarted": "<timestamp>",
+  "stagedCounts": {
+    "rawCandidates": 0,
+    "mergedCandidates": 0
+  },
+  "sources": [
+    {
+      "id": "main_branch",
+      "status": "done",
+      "empty": false,
+      "whatRead": "README, CI workflows, build manifests, docs, and all planned CODE streams; tests/ collapsed to one TEST skim stream; triageData/ auto-collapsed to one DATA stream",
+      "queries": [
+        "python3 \"$SKILL_DIR/scripts/dispatch.py\" --repo-root \"$MAIN\" --run-dir \"$RUN_DIR\" --max-streams 500"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "external_docs",
+      "status": "no-access",
+      "empty": true,
+      "whatRead": "No accessible external docs",
+      "queries": ["markitdown https://example.invalid/doc"],
+      "gaps": ["Document URL returned 401 Unauthorized"]
+    },
+    {
+      "id": "ext_chat",
+      "status": "tool-missing",
+      "empty": true,
+      "whatRead": "Team-chat connector not available in this environment",
+      "queries": ["preflight: no Slack/Teams/chat tool surfaced"],
+      "gaps": [
+        "No team-chat connector configured; a run from a chat-enabled environment would cover it (nothing to grant)"
+      ]
+    }
+  ],
+  "codeStreams": [
+    {
+      "id": "code:example",
+      "status": "done",
+      "files": 5,
+      "coveringAgent": "mine-example",
+      "saturationBasis": "All high-signal files read; fixtures classified as trivial"
+    },
+    {
+      "id": "data:triageData",
+      "status": "skipped",
+      "files": 3841,
+      "coveringAgent": "n/a (collapsed DATA stream)",
+      "saturationBasis": "Data dir (~99% .json) auto-collapsed by dispatch.py; no durable code memories expected"
+    }
+  ],
+  "artifacts": [
+    "candidates.merged.jsonl",
+    "owner-repo.coverage.md"
+  ],
+  "gaps": [
+    "External docs unavailable: 401 Unauthorized",
+    "Team-chat connector absent (tool-missing); a chat-enabled run would cover it"
+  ]
+}
