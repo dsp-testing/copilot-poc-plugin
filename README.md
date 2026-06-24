@@ -8,18 +8,24 @@ Proof-of-concept [GitHub Copilot Extension](https://docs.github.com/en/copilot/b
 
 ```
 copilot-poc-plugin/
-├── plugin/           # Copilot Extension plugin template (Node.js / TypeScript)
+├── plugin/                 # Copilot Extension plugin (Node.js / TypeScript)
 │   ├── src/
-│   │   ├── index.ts  # Express server entry point
-│   │   └── agent.ts  # Agent logic — customise this
-│   ├── .env.example  # Environment variable reference
+│   │   ├── index.ts        # Express server entry point
+│   │   ├── agent.ts        # Agent loop — calls Copilot API & dispatches skills
+│   │   └── skills/
+│   │       ├── types.ts    # Shared Skill interface
+│   │       ├── index.ts    # Skills registry
+│   │       ├── get-issue.ts    # Skill: fetch a GitHub issue
+│   │       ├── search-repos.ts # Skill: search repositories
+│   │       └── get-user.ts     # Skill: look up a GitHub user
+│   ├── .env.example        # Environment variable reference
 │   ├── package.json
-│   └── README.md     # Plugin setup & customisation guide
-├── marketplace/      # Marketplace manifest & publishing guide
-│   ├── manifest.json # Machine-readable plugin listing metadata
-│   └── README.md     # How to publish the plugin to the marketplace
-├── LICENSE           # GitHub-internal use only
-└── README.md         # This file
+│   └── README.md           # Plugin setup, skills guide & customisation
+├── marketplace/            # Marketplace manifest & publishing guide
+│   ├── manifest.json       # Machine-readable plugin listing metadata
+│   └── README.md           # How to publish the plugin to the marketplace
+├── LICENSE                 # GitHub-internal use only
+└── README.md               # This file
 ```
 
 ## Getting started

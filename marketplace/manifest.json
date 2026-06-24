@@ -38,7 +38,22 @@
     "endpoint": "https://<your-deployment-url>/",
     "capabilities": [
       "chat_completion",
-      "streaming"
+      "streaming",
+      "function_calling"
+    ],
+    "skills": [
+      {
+        "name": "get_issue",
+        "description": "Fetches details about a specific GitHub issue, including its title, state, body, and labels."
+      },
+      {
+        "name": "search_repos",
+        "description": "Searches GitHub for repositories matching a query and returns a summary of the top results."
+      },
+      {
+        "name": "get_user",
+        "description": "Retrieves the public GitHub profile for a given username, including their name, bio, company, location, and public repository count."
+      }
     ]
   },
   "visibility": "internal",
