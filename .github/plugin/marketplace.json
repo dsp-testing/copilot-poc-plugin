@@ -20,7 +20,7 @@
       "license": "internal",
       "source": {
         "source": "github",
-        "repo": "dsp-testing/copilot-dreaming",
+        "repo": "dsp-testing/copilot-poc-plugin",
         "path": "plugins/copilot-dreaming"
       }
     }
