@@ -1,5 +1,5 @@
 {
-  "name": "copilot-plugins",
+  "name": "copilot-poc-plugins",
   "metadata": {
     "description": "GitHub Copilot plugins",
     "version": "1.0.0"
