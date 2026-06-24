@@ -1,0 +1,38 @@
+GitHub Internal Use License
+
+Copyright (c) 2024 GitHub, Inc.
+
+INTERNAL USE ONLY
+
+This software and associated documentation files (the "Software") are
+proprietary and confidential to GitHub, Inc. ("GitHub"). The Software is
+licensed solely for internal use by GitHub employees and authorized
+contractors, and is not licensed for distribution, sublicensing, or use
+outside of GitHub's internal systems and projects.
+
+RESTRICTIONS
+
+1. The Software may not be copied, modified, merged, published, distributed,
+   sublicensed, or sold outside of GitHub's internal use.
+
+2. The Software may not be shared with any third party without the express
+   written consent of GitHub, Inc.
+
+3. The Software may not be used in any commercial product or service that
+   is not owned and operated by GitHub, Inc.
+
+4. Any contributions or modifications made to the Software are subject to
+   the same restrictions as the original Software.
+
+DISCLAIMER
+
+THE SOFTWARE IS PROVIDED "AS IS" FOR INTERNAL USE ONLY, WITHOUT WARRANTY
+OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NON-INFRINGEMENT. IN NO EVENT SHALL GITHUB, INC. BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For permissions beyond the scope of this license, contact:
+opensource@github.com
