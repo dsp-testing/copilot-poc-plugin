@@ -14,9 +14,9 @@ a skill**: a `SKILL.md` that encodes that procedure as a formal **Conditions (C)
 Interface (R) / Policy (π) / Termination (T)** model a future agent can execute directly.
 
 Its evidence source is the **local checkout** — plain files read with `glob`/`grep`/`view`.
-That means **no network egress and no `session_store_sql`**, so it is unaffected by the
-automation-sandbox firewall *and* by the Remote Session Store's data quirks. It is the most
-robust forge variant to run inside a cloud-agent (CCA) automation.
+That means **no network egress and no session-store access**, so it is unaffected by the
+automation-sandbox firewall, which makes it well suited to run inside a cloud-agent (CCA)
+automation.
 
 The output is a set of files written to a run directory for human review. This skill never
 commits to any repo and never calls artifact-placement itself — surfacing the proposal as a
@@ -26,7 +26,7 @@ GitHub issue is an optional, separate downstream step.
 
 - [1. Inputs](#1-inputs)
 - [Prerequisites](#prerequisites)
-- [2. How this differs from the session-history forge skills](#2-how-this-differs)
+- [2. Why this source is robust](#2-why-this-source-is-robust)
 - [3. Procedure](#3-procedure)
 - [4. Generated skill schema](#4-generated-skill-schema)
 - [5. Validation gate](#5-validation-gate)
@@ -68,12 +68,10 @@ the proposal.
 ### Prerequisites
 
 This skill's evidence source is the **local filesystem** (the target repo's checkout), read
-with built-in tools. Unlike the session-history forge skills, it needs **no feature flag and
-no network**:
+with built-in tools. It needs **no feature flag and no network**:
 
-- **No `session_store_sql`** — there is nothing to query in the session store, so the
-  `copilot_swe_agent_chronicle` flag and the main-agent/`explore`-subagent restriction do
-  **not** apply here.
+- **No session-store access** — there is nothing to query in any session store; this skill
+  reads only files, so no related feature flag or query restriction applies.
 - **No network/firewall dependency** — `scan_docs.py` only reads files under `--root`. The
   automation sandbox firewall (which blocks `gh api` / `curl`) is irrelevant.
 - **The docs must actually be present in the checkout.** In a CCA automation the repo is
@@ -85,23 +83,22 @@ and stop — do not invent a procedure.
 
 ---
 
-## 2. How this differs
+## 2. Why this source is robust
 
-The other forge skills mine the agent's **session history** (the `tool.execution_*` event
-stream) through `session_store_sql`:
+This skill mines the repo's **own checked-in documentation** — plain files read with
+`glob`/`grep`/`view`. Its evidence is human-authored intent ("here is the correct
+procedure"), not observed behaviour or any external state.
 
-- **forge-skill-creator** — *which command* recurs on the happy path.
-- **forge-skill-from-friction** — *which command failed* and how it was recovered.
-- **forge-timing-skill** — *how long* commands take (wait budgets).
+That makes it:
 
-**This skill mines a completely different source: the repo's own checked-in docs.** Its
-evidence is human-authored intent ("here is the correct procedure"), not observed behaviour.
-That makes it (a) deterministic and reproducible — the same doc forges the same skill every
-run, with no seeding ritual — and (b) the only forge variant that is fully independent of the
-session store and the firewall, so it is the safest to demo in an automation.
+- **Deterministic and reproducible** — the same doc forges the same skill every run, with
+  no seeding ritual and no dependency on prior agent activity.
+- **Fully self-contained** — it reads only the local checkout, so it has **no dependency on
+  the session store and no network egress**. The automation-sandbox firewall (which blocks
+  `gh api` / `curl`) and any session-store data quirks are irrelevant.
 
-The forged skill is still the same shape (C/R/π/T) the other skills emit, so all four feed a
-single review/install pipeline.
+The forged skill is emitted in a formal **Conditions / Interface / Policy / Termination
+(C/R/π/T)** shape, ready for a human to review and install.
 
 ---
 
