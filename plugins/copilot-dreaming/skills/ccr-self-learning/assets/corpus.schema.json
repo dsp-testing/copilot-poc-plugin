@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CCR outcome-labeled comment corpus record",
+  "description": "One record per Copilot Code Review (CCR) comment joined with its observed outcome. This is the CONTRACT for the evidence connector that Dreaming does not yet provide (capability gap G1/G2 in dreaming-skills-plan.md): the corpus lives in CCR's findings store (CosmosDB, keyed by repo/owner) + session telemetry, which is not reachable from a GitHub-MCP-only, firewalled Dreaming sandbox. Until that connector exists, ccr-self-learning runs against a pre-materialized export in this shape (one JSON object per line, JSONL).",
+  "type": "object",
+  "required": ["comment_id", "repo", "path", "category", "source", "outcome"],
+  "properties": {
+    "comment_id": {"type": "string", "description": "Stable id of the review comment."},
+    "repo": {"type": "string", "description": "owner/name the comment was posted on."},
+    "pr_number": {"type": "integer"},
+    "path": {"type": "string", "description": "File path the comment targets."},
+    "category": {"type": "string", "description": "CCR finding category, e.g. error-handling, naming, security-authz, style, tests, performance."},
+    "rule_id": {"type": "string", "description": "Optional specific rule/check id."},
+    "body": {"type": "string", "description": "Comment text."},
+    "source": {"type": "string", "enum": ["ccr", "human"], "description": "Who authored the comment. 'human' rows capture conventions humans enforce that CCR may have missed."},
+    "created_at": {"type": "string", "format": "date-time"},
+    "outcome": {
+      "type": "string",
+      "enum": ["accepted", "rejected", "engaged", "ignored", "superseded"],
+      "description": "Labeled outcome. accepted=resolved-with-code-change; rejected=deleted/dismissed; ignored=outdated-without-change; engaged=human replied/discussed; superseded=replaced by a later comment."
+    },
+    "outcome_evidence": {
+      "type": "string",
+      "description": "How the outcome was determined, e.g. resolved-with-code-change, deleted, outdated, reply, reaction."
+    },
+    "reactions": {
+      "type": "object",
+      "properties": {
+        "thumbs_up": {"type": "integer"},
+        "thumbs_down": {"type": "integer"}
+      }
+    },
+    "human_followup": {
+      "type": "string",
+      "description": "Optional text of a human reply that enforces a convention (mined for 'convention' learnings)."
+    }
+  }
+}
